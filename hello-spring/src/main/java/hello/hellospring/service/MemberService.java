@@ -8,8 +8,12 @@ import java.util.List;
 import java.util.Optional;
 // 서비스는 비지니스 로직 룰에 맞도록 네이밍해야한다.
 public class MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
 
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository){
+        this.memberRepository = new MemoryMemberRepository();
+    }
     /**
      * 회원 가입
      */
@@ -22,6 +26,7 @@ public class MemberService {
         return member.getId();
     }
 
+    //method Refactoring - ctrl + alt + m
     private void validateDuplicateMember(Member member) {
         memberRepository.findByName(member.getName())
                 .ifPresent(m -> {
