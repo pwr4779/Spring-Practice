@@ -6,12 +6,16 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
 // 서비스는 비지니스 로직 룰에 맞도록 네이밍해야한다.
 
+//JPA를 사용할 때 변경이 이뤄진다면 항상 Transactional이 있어야한다.
+//여기서는 변경 코드가 join밖에 없기 때문에 join에만 붙여도 된다.
+@Transactional
 public class MemberService {
 
     private final MemberRepository memberRepository;
