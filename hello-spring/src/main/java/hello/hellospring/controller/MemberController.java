@@ -5,9 +5,11 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
 
 
 //컨트롤러라는 어노테이션을 붙이면 Spring 컨테이너에서 빈으로 스프링이 관리 해준다.
@@ -36,5 +38,12 @@ public class MemberController {
         return "redirect:/";
     }
 
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMember();
+        model.addAttribute("members", members);
+        return "members/memberList";
+    }
 
 }
