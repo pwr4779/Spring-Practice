@@ -1,10 +1,13 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
+import hello.hellospring.repository.JdbcTemplateMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
 
 /**
  * 컴포넌트 스캔방식이 편하긴 하지만 자바코드로 bean 생성 방법을 알아야한다.
@@ -31,6 +34,21 @@ public class SpringConfig {
 //    public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
 //    }
+    private final DataSource dataSource;
 
+    public SpringConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @Bean
+    public MemberService memberService() {
+        return new MemberService(memberRepository());
+    }
+
+    @Bean
+    public MemberRepository memberRepository() {
+// return new MemoryMemberRepository();
+        return new JdbcTemplateMemberRepository(dataSource);
+    }
 
 }
