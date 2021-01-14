@@ -20,17 +20,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringConfig {
 
-    @Bean
-    public MemberService memberService() {
-        return new MemberService(memberRepository());
-    }
-
-    //직접 설정 파일을 사용을 하면 DB가 설정이 안됬을 때 임시로 하나의 레포지토리로 구현 후
-    // 나중에 여기만 DB레포지토리로만 바꿔 넣으면 된다.
-    @Bean
-    public MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
-    }
+//    @Bean
+//    public MemberService memberService() {
+//        return new MemberService(memberRepository());
+//    }
+//
+//    //직접 설정 파일을 사용을 하면 DB가 설정이 안됬을 때 임시로 하나의 레포지토리로 구현 후
+//    // 나중에 여기만 DB레포지토리로만 바꿔 넣으면 된다.
+//    @Bean
+//    public MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//    }
 
 
 }
